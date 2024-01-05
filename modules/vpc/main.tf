@@ -98,3 +98,14 @@ resource "aws_route" "route" {
   vpc_peering_connection_id = aws_vpc_peering_connection.peering.id
 }
 
+resource "aws_route_table_association" "public" {
+  count = length(var.public_subnets)
+  subnet_id      = var.public_subnets[count.index].id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "private" {
+  count = length(var.private_subnets)
+  subnet_id      = var.private_subnets[count.index].id
+  route_table_id = aws_route_table.private.id
+}
