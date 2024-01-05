@@ -10,3 +10,12 @@ module "vpc" {
   default_vpc_cidr = var.default_vpc_cidr
   default_rt_id = var.default_rt_id
 }
+
+module "public-lb" {
+  source = "./modules/alb"
+  env = var.env
+  alb-type          = "public"
+  alb_sg_allow_cidr = "0.0.0.0/0"
+  internal          = "false"
+  vpc_id            = module.vpc.vpc_id
+}
