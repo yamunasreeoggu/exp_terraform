@@ -5,3 +5,4 @@ variable "private_subnets" {}
 variable "azs" {}
 variable "default_vpc_id" {}
 variable "account_id" {}
+variable "default_vpc_cidr" {}
