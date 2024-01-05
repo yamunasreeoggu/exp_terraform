@@ -6,6 +6,5 @@ module "vpc" {
   private_subnets = var.private_subnets
   azs = var.azs
   default_vpc_id = var.default_vpc_id
-  default_vpc_cidr = var.default_vpc_cidr
   account_id = var.account_id
 }
