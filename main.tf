@@ -13,9 +13,9 @@ module "vpc" {
 
 module "public-lb" {
   source = "./modules/alb"
-  env = var.env
+  env               = var.env
   alb-type          = "public"
   alb_sg_allow_cidr = "0.0.0.0/0"
-  internal          = "false"
+  internal          = false
   vpc_id            = module.vpc.vpc_id
 }
