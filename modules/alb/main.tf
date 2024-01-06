@@ -23,3 +23,15 @@ resource "aws_security_group" "sec-grp" {
     Name = "${var.env}-${var.alb-type}-sg"
   }
 }
+
+resource "aws_lb" "public" {
+  name               = "${var.env}-${var.alb-type}-lb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.sec-grp.id]
+  subnets            = var.subnets
+
+  tags = {
+    Name = "${var.env}-${var.alb-type}-lb"
+  }
+}
