@@ -24,26 +24,14 @@ resource "aws_security_group" "sec-grp" {
   }
 }
 
-resource "aws_lb" "public" {
-  name               = "${var.env}-${var.alb-type}-lb"
-  internal           = false
+resource "aws_lb" "alb" {
+  name               = "${var.env}-${var.alb-type}"
+  internal           = var.internal
   load_balancer_type = "application"
   security_groups    = [aws_security_group.sec-grp.id]
   subnets            = var.subnets
 
   tags = {
-    Name = "${var.env}-${var.alb-type}-lb"
-  }
-}
-
-resource "aws_lb" "private" {
-  name               = "${var.env}-${var.alb-type}-alb"
-  internal           = true
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.sec-grp.id]
-  subnets            = var.subnets
-
-  tags = {
-    Name = "${var.env}-${var.alb-type}-alb"
+    Environment = "${var.env}-${var.alb-type}"
   }
 }
