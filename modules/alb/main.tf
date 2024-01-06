@@ -37,13 +37,13 @@ resource "aws_lb" "public" {
 }
 
 resource "aws_lb" "private" {
-  name               = "${var.env}-${var.alb-type}-lb"
+  name               = "${var.env}-${var.alb-type}-alb"
   internal           = true
   load_balancer_type = "application"
   security_groups    = [aws_security_group.sec-grp.id]
   subnets            = var.subnets
 
   tags = {
-    Name = "${var.env}-${var.alb-type}-lb"
+    Name = "${var.env}-${var.alb-type}-alb"
   }
 }
