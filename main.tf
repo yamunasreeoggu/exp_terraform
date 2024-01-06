@@ -12,11 +12,21 @@ module "vpc" {
 }
 
 module "public-lb" {
-  source = "./modules/alb"
+  source            = "./modules/alb"
   env               = var.env
   alb-type          = "public"
   alb_sg_allow_cidr = ["0.0.0.0/0"]
   internal          = false
   vpc_id            = module.vpc.vpc_id
   subnets           = module.vpc.public_subnets
+}
+
+module "private-lb" {
+  source            = "./modules/alb"
+  env               = var.env
+  alb-type          = "private"
+  alb_sg_allow_cidr = var.vpc_cidr
+  internal          = true
+  vpc_id            = module.vpc.vpc_id
+  subnets           = module.vpc.private_subnets
 }
