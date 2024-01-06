@@ -25,7 +25,7 @@ module "private-lb" {
   source            = "./modules/alb"
   env               = var.env
   alb-type          = "private"
-  alb_sg_allow_cidr = var.vpc_cidr
+  alb_sg_allow_cidr = [var.vpc_cidr]
   internal          = true
   vpc_id            = module.vpc.vpc_id
   subnets           = module.vpc.private_subnets
