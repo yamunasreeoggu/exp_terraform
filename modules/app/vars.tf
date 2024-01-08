@@ -4,3 +4,6 @@ variable "vpc_id" {}
 variable "app-port" {}
 variable "vpc_cidr" {}
 variable "instance_type" {}
+variable "min_size" {}
+variable "max_size" {}
+variable "desired_capacity" {}

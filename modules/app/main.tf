@@ -39,3 +39,14 @@ resource "aws_launch_template" "template" {
   }
 }
 
+resource "aws_autoscaling_group" "asg" {
+  name = "${var.env}-${var.component}"
+  desired_capacity   = var.desired_capacity
+  max_size           = var.max_size
+  min_size           = var.min_size
+
+  launch_template {
+    id      = aws_launch_template.template.id
+    version = "$Latest"
+  }
+}

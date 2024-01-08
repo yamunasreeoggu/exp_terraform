@@ -7,3 +7,7 @@ variable "default_vpc_id" {}
 variable "account_id" {}
 variable "default_vpc_cidr" {}
 variable "default_rt_id" {}
+variable "instance_type" {}
+variable "min_size" {}
+variable "max_size" {}
+variable "desired_capacity" {}
