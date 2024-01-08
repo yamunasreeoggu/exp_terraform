@@ -64,7 +64,9 @@ module "backend" {
 module "mysql" {
   source = "./modules/rds"
   env       = var.env
+  component = "mysql"
   subnets   = module.vpc.private_subnets
   vpc_cidr  = [var.vpc_cidr]
   vpc_id    = module.vpc.vpc_id
+  rds_instance_class = var.rds_instance_class
 }
