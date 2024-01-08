@@ -43,7 +43,7 @@ resource "aws_rds_cluster" "rds-cluster" {
   master_password         = data.aws_ssm_parameter.rds-password.value
   db_subnet_group_name    = aws_db_subnet_group.subnet-group.name
   vpc_security_group_ids  = [aws_security_group.sec-grp.id]
-  kip_final_snapshot      = true
+  skip_final_snapshot      = true
 }
 
 resource "aws_rds_cluster_instance" "cluster_instance" {
