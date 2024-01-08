@@ -12,3 +12,4 @@ instance_type = "t3.micro"
 desired_capacity = 1
 min_size = 1
 max_size = 1
+workstation_node_cidr = ["172.31.23.171/32"]
