@@ -33,6 +33,7 @@ resource "aws_db_subnet_group" "subnet-group" {
   }
 }
 
+
 resource "aws_rds_cluster" "rds-cluster" {
   cluster_identifier      = "${var.env}-rds-cluster"
   engine                  = "aurora-mysql"
@@ -41,4 +42,13 @@ resource "aws_rds_cluster" "rds-cluster" {
   master_username         = data.aws_ssm_parameter.rds-username.value
   master_password         = data.aws_ssm_parameter.rds-password.value
   db_subnet_group_name    = aws_db_subnet_group.subnet-group.name
+}
+
+resource "aws_rds_cluster_instance" "cluster_instances" {
+  count              = 1
+  identifier         = "${var.env}-rds-cluster-instance-${count.index}"
+  cluster_identifier = aws_rds_cluster.rds-cluster.id
+  instance_class     = "db.t3.medium"
+  engine             = aws_rds_cluster.rds-cluster.engine
+  engine_version     = aws_rds_cluster.rds-cluster.engine_version
 }
