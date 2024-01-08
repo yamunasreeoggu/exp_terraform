@@ -45,6 +45,10 @@ resource "aws_launch_template" "template" {
       Name = "${var.env}-${var.component}"
     }
   }
+  user_data = base64encode(templatefile("${path.module}/userdata.sh",{
+    role_name = var.component
+    env = var.env
+  }))
 }
 
 resource "aws_autoscaling_group" "asg" {
