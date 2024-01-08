@@ -40,6 +40,6 @@ module "frontend" {
   instance_type    = var.instance_type
   max_size         = var.max_size
   min_size         = var.min_size
-  vpc_cidr         = var.vpc_cidr
+  vpc_cidr         = [var.vpc_cidr]
   vpc_id           = module.vpc.vpc_id
 }
