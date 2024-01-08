@@ -34,7 +34,7 @@ module "private-lb" {
 module "frontend" {
   source           = "./modules/app"
   app-port         = 80
-  component        = frontend
+  component        = "frontend"
   desired_capacity = var.desired_capacity
   env              = var.env
   instance_type    = var.instance_type
