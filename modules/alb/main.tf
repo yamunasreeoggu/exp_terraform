@@ -66,7 +66,7 @@ resource "aws_lb_listener" "listener-http-private" {
   protocol          = "HTTP"
 
   default_action {
-    type = "redirect"
+    type = "forward"
     target_group_arn = var.tg_arn
   }
 }
