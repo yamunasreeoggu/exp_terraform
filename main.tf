@@ -19,6 +19,8 @@ module "public-lb" {
   internal          = false
   vpc_id            = module.vpc.vpc_id
   subnets           = module.vpc.public_subnets
+  dns_name          = "frontend-${var.env}.yamunadevops.online"
+  zone_id           = var.zone_id
 }
 
 module "private-lb" {
