@@ -13,3 +13,4 @@ variable "max_size" {}
 variable "desired_capacity" {}
 variable "workstation_node_cidr" {}
 variable "rds_instance_class" {}
+variable "zone_id" {}

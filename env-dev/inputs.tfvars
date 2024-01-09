@@ -14,3 +14,4 @@ min_size = 1
 max_size = 1
 workstation_node_cidr = ["172.31.23.171/32"]
 rds_instance_class = "db.t3.medium"
+zone_id = "Z10281701O26X6KFZM8G8"

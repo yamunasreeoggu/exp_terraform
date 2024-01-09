@@ -35,3 +35,11 @@ resource "aws_lb" "alb" {
     Environment = "${var.env}-${var.alb-type}"
   }
 }
+
+resource "aws_route53_record" "route53" {
+  zone_id = var.zone_id
+  name    = var.dns_name
+  type    = "CNAME"
+  ttl     = 10
+  records = [aws_lb.alb.dns_name]
+}

@@ -29,6 +29,8 @@ module "private-lb" {
   internal          = true
   vpc_id            = module.vpc.vpc_id
   subnets           = module.vpc.private_subnets
+  dns_name          = "backend-${var.env}.yamunadevops.online"
+  zone_id           = var.zone_id
 }
 
 module "frontend" {

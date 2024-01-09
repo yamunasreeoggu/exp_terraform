@@ -4,3 +4,5 @@ variable "internal" {}
 variable "vpc_id" {}
 variable "alb_sg_allow_cidr" {}
 variable "subnets" {}
+variable "zone_id" {}
+variable "dns_name" {}
