@@ -60,7 +60,7 @@ resource "aws_route53_record" "route53" {
 #  }
 #}
 
-resource "aws_lb_listener" "listener-http-private" {
+resource "aws_lb_listener" "listener-http" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
   protocol          = "HTTP"
