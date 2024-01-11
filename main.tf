@@ -54,6 +54,7 @@ module "frontend" {
 
 module "backend" {
   source           = "./modules/app"
+  depends_on       = [module.mysql]
   app-port         = 8080
   component        = "backend"
   desired_capacity = var.desired_capacity
