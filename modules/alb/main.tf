@@ -11,6 +11,15 @@ resource "aws_security_group" "sec-grp" {
     cidr_blocks      = var.alb_sg_allow_cidr
   }
 
+  ingress {
+    description      = "HTTPS"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = var.alb_sg_allow_cidr
+  }
+
+
   egress {
     from_port        = 0
     to_port          = 0
@@ -44,26 +53,42 @@ resource "aws_route53_record" "route53" {
   records = [aws_lb.alb.dns_name]
 }
 
-#resource "aws_lb_listener" "listener-http-public" {
-#  load_balancer_arn = aws_lb.alb.arn
-#  port              = "80"
-#  protocol          = "HTTP"
-#
-#  default_action {
-#    type = "redirect"
-#
-#    redirect {
-#      port        = "443"
-#      protocol    = "HTTPS"
-#      status_code = "HTTP_301"
-#    }
-#  }
-#}
-#
-resource "aws_lb_listener" "listener-http" {
+resource "aws_lb_listener" "listener-http-public" {
+  count             = var.alb-type == "public" ? 1 : 0
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
   protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "listener-http-private" {
+  count             = var.alb-type == "private" ? 1 : 0
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "forward"
+    target_group_arn = var.tg_arn
+  }
+}
+
+resource "aws_lb_listener" "listener-https" {
+  count             = var.alb-type == "public" ? 1 : 0
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:acm:us-east-1:492681564023:certificate/ea2dec62-a84a-40c8-a40d-ef3c8ce2e6de"
 
   default_action {
     type = "forward"
