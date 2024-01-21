@@ -24,7 +24,7 @@ pipeline {
         message 'should we continue?'
       }
       steps {
-        sh 'terraform ${ACTION} -var-file=env-${ENV}/inputs.tfvars -auto-approve
+        sh 'terraform ${ACTION} -var-file=env-${ENV}/inputs.tfvars -auto-approve'
       }
     }
   }
